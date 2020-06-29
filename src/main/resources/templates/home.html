@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Home page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+<header th:replace="fragments/header :: cabecalho">
+	<div>header</div>
+</header>
+<body>
+	<div class="container my-5">
+		<br />
+		<div th:if="${msgErroHome}" class="alert alert-danger" role="alert">
+			<p th:text="${msgErroHome}" />
+		</div>
+		<div th:if="${msgSucessoHome}" class="alert alert-success"
+			role="alert">
+			<p th:text="${msgSucessoHome}" />
+		</div>
+		<h3>Menu</h3>
+		<div class="card">
+			<div class="card-body">
+				<div class="row form-group">
+					<a th:if="true" role="button" th:href="@{/alunos/consultar}"
+						class="btn btn-outline-primary col-md-3">Consultar Aluno</a>
+				</div>
+				<div class="row row form-group">
+					<a th:if="true" role="button" th:href="@{/alunos/cadastrar}"
+						class="btn btn-outline-primary col-md-3">Cadastrar Aluno</a>
+				</div>
+				<div class="row row form-group">
+					<a th:if="true" role="button" th:href="@{/alunos/relatorios}"
+						class="btn btn-outline-primary col-md-3">Relatório
+						Inadimplência</a>
+				</div>
+				<div class="row row form-group">
+					<a th:if="true" role="button" th:href="@{/usuarios/cadastrar}"
+						class="btn btn-outline-primary col-md-3">Cadastrar Usuario</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<footer th:replace="fragments/footer :: rodape">
+	<div>footer</div>
+</footer>
+</html>

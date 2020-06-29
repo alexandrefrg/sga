@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Consultar Aluno</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+<header th:replace="fragments/header :: cabecalho">
+	<div>header</div>
+</header>
+<body>
+</body>
+<div class="container my-5">
+	<br />
+	<div th:if="${msgErroConsulta}" class="alert alert-danger" role="alert">
+		<p th:text="${msgErroConsulta}" />
+	</div>
+	<div th:if="${msgSucessoConsulta}" class="alert alert-success"
+		role="alert">
+		<p th:text="${msgSucessoConsulta}" />
+	</div>
+	<h3>Consultar Aluno</h3>
+	<div class="card">
+		<div class="card-body">
+			<div class="col-md-12">
+				<form action="#" th:action="@{/alunos/consultar}"
+					th:object="${aluno}" method="post">
+					<div class="row">
+						<div class="form-group col-md-4">
+							<label for="name" class="col-form-label">Nome</label> <input
+								th:field="*{name}" id="Nome" type="text" class="form-control"
+								placeholder="Nome"> <span id="txtMensagemErroNome"
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+								class="text-danger"> </span>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-4">
+							<label for="CPF" class="col-form-label">CPF</label> <input
+								th:field="*{CPF}" id="CPF" type="text" class="form-control"
+								placeholder="CPF"> <span id="txtMensagemErroCPF"
+								th:if="${#fields.hasErrors('CPF')}" th:errors="*{CPF}"
+								class="text-danger"> </span>
+						</div>
+					</div>
+
+					<div class="form-group col-md-20">
+						<input type="submit" class="btn btn-primary" id="btnConsultar"
+							value="Consultar"> <a th:if="true" role="button"
+							th:href="@{/alunos/cadastrar}" class="btn btn-warning">
+							Cadastrar Aluno</a>
+					</div>
+				</form>
+
+				<table th:if="${listaAlunos}" class="table table-striped">
+					<thead>
+						<tr>
+							<td>Nome</td>
+							<td>CPF</td>
+							<td>Data Matricula</td>
+							<td>Tem Atestado?</td>
+							<td>Mensalidade Ok?</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="aluno : ${listaAlunos}">
+							<td th:text="${aluno.name}">.</td>
+							<td th:text="${aluno.CPF}">.</td>
+							<td th:text="${aluno.enrollmentDate}">.</td>
+							<td th:text="${aluno.medicalCertificate ? 'Sim' : 'Não'}">.</td>
+							<td th:text="${aluno.paid ? 'Sim' : 'Não'}">.</td>
+							<td>
+								<div class="btn-group pull-right">
+									<a class="btn btn-sm btn-primary" th:if="true"
+										th:href="@{/alunos/editar/{id}(id=${aluno.id})}"
+										id="btnEditarAluno">Editar</a> <a th:if="${!aluno.paid}"
+										class="btn btn-sm btn-warning"
+										th:href="@{/alunos/lancarPagamento/{id}(id=${aluno.id})}"
+										id="btnLancarPagamento">Pagou</a> <a th:if="true"
+										class="btn btn-sm btn-danger"
+										th:href="@{/alunos/deletar/{id}(id=${aluno.id})}"
+										id="btnExcluirAluno">Deletar</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<footer th:replace="fragments/footer :: rodape">
+	<div>footer</div>
+</footer>
+</html>

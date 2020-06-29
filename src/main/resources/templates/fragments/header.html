@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<header th:fragment="cabecalho">
+		<nav
+			class="navbar navbar-inverse navbar navbar-dark bg-dark fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="btn btn-dark navbar-toggle pull-left">
+						<i class="oi oi-menu"></i>
+					</button>
+					<a class="navbar-brand " th:href="@{/home}">Sistema de Gestao
+						de Academia</a>
+				</div>
+				<div class="navbar-header">
+					<button type="button" class="btn btn-dark navbar-toggle pull-right">
+						<i class="oi oi-menu"></i>
+					</button>
+					<a class="navbar-brand " th:href="@{/usuarios/logout}">Logout</a>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<br />
+	<br />
+</body>
+</html>

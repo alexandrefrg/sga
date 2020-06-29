@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Editar Aluno</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+<header th:replace="fragments/header :: cabecalho">
+	<div>header</div>
+</header>
+<body>
+</body>
+<div class="container my-5">
+	<br />
+	<div th:if="${msgErroHome}" class="alert alert-danger" role="alert">
+		<p th:text="${msgErroHome}" />
+	</div>
+	<h3>Editar Aluno</h3>
+	<div class="card">
+		<div class="card-body">
+			<div class="col-md-8">
+				<form action="#" th:action="@{/alunos/editar/{id} (id=${aluno.id})}"
+					th:object="${aluno}" method="post">
+
+					<div class="row">
+						<div class="form-group col-md-4">
+							<label for="name" class="col-form-label">Nome</label> <input
+								th:field="*{name}" id="Nome" type="text" class="form-control"
+								placeholder="Nome"> <span id="txtMensagemErroNome"
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+								class="text-danger"> </span>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-4">
+							<label for="CPF" class="col-form-label">CPF</label> <input
+								th:field="*{CPF}" id="CPF" type="text" class="form-control"
+								placeholder="CPF"> <span id="txtMensagemErroCPF"
+								th:if="${#fields.hasErrors('CPF')}" th:errors="*{CPF}"
+								class="text-danger"> </span>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-4">
+							<label for="enrollmentDate" class="col-form-label">Data
+								Matricula</label> <input th:field="*{enrollmentDate}" id="dataMatricula"
+								type="date" class="form-control"> <span
+								id="txtMensagemErroDataMatricula"
+								th:if="${#fields.hasErrors('enrollmentDate')}"
+								th:errors="*{enrollmentDate}" class="text-danger"> </span>
+						</div>
+					</div>
+
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox"
+							th:field="*{medicalCertificate}" id="atestadoMedico"> <label
+							class="form-check-label">Atestado Médico</label>
+					</div>
+
+					<br /> <br />
+
+					<div class="form-group col-md-20">
+						<input type="submit" class="btn btn-primary"
+							id="btnAtualizarAluno" value="Atualizar Cadastro">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<footer th:replace="fragments/footer :: rodape">
+	<div>footer</div>
+</footer>
+</html>
