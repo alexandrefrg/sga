@@ -81,7 +81,7 @@ public class AlunoController {
 			}
 		} else {
 
-			Set<Aluno> listaAlunos = repository.finByNameLike(aluno.getName());
+			Set<Aluno> listaAlunos = repository.findByNameLike(aluno.getName());
 
 			if (listaAlunos.size() > 0) {
 
@@ -159,6 +159,13 @@ public class AlunoController {
 		} else {
 			mv.addObject("msgErroHome", "Aluno não encontrado!");
 		}
+		return mv;
+	}
+
+	@GetMapping("/relatorio")
+	public ModelAndView gerarRelatorio() {
+		ModelAndView mv = new ModelAndView("relatorioInadimplencia");
+		mv.addObject("listaAlunos", repository.findUnpaid(false));
 		return mv;
 	}
 }

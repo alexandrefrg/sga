@@ -60,7 +60,7 @@ class UC05ConsultarAlunoTests {
 		aluno = new Aluno("12345678901", "Z Aluno Velho", LocalDate.now(), true, true);
 		repository.save(aluno);
 
-		Set<Aluno> ro = repository.finByNameLike("Novo Aluno");
+		Set<Aluno> ro = repository.findByNameLike("Novo Aluno");
 		assertThat(ro.size()).isEqualTo(3);
 		assertThat(ro.iterator().next().getName()).isEqualTo("Novo Aluno A");
 	}

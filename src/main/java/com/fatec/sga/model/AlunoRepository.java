@@ -12,7 +12,10 @@ import org.springframework.stereotype.Repository;
 public interface AlunoRepository extends CrudRepository<Aluno, Long> {
 
 	@Query(value = "SELECT a FROM Aluno a WHERE a.name LIKE %:name% ORDER BY a.name")
-	Set<Aluno> finByNameLike(@Param("name") String name);
+	Set<Aluno> findByNameLike(@Param("name") String name);
 
 	Optional<Aluno> findByCPF(@Param("CPF") String CPF);
+
+	@Query(value = "SELECT a FROM Aluno a WHERE a.paid = :paid ORDER BY a.name")
+	Set<Aluno> findUnpaid(@Param("paid") boolean paid);
 }

@@ -25,6 +25,40 @@
 		<p th:text="${msgErroHome}" />
 	</div>
 	<h3>Lista Inadimplencia</h3>
+	<table th:if="${listaAlunos}" class="table table-striped">
+		<thead>
+			<tr>
+				<td>Nome</td>
+				<td>CPF</td>
+				<td>Data Matricula</td>
+				<td>Tem Atestado?</td>
+				<td>Mensalidade Ok?</td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="aluno : ${listaAlunos}">
+				<td th:text="${aluno.name}">.</td>
+				<td th:text="${aluno.CPF}">.</td>
+				<td th:text="${aluno.enrollmentDate}">.</td>
+				<td th:text="${aluno.medicalCertificate ? 'Sim' : 'Não'}">.</td>
+				<td th:text="${aluno.paid ? 'Sim' : 'Não'}">.</td>
+				<td>
+					<div class="btn-group pull-right">
+						<a class="btn btn-sm btn-primary" th:if="true"
+							th:href="@{/alunos/editar/{id}(id=${aluno.id})}"
+							id="btnEditarAluno">Editar</a> <a th:if="${!aluno.paid}"
+							class="btn btn-sm btn-warning"
+							th:href="@{/alunos/lancarPagamento/{id}(id=${aluno.id})}"
+							id="btnLancarPagamento">Pagou</a> <a th:if="true"
+							class="btn btn-sm btn-danger"
+							th:href="@{/alunos/deletar/{id}(id=${aluno.id})}"
+							id="btnExcluirAluno">Deletar</a>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 </body>
 <footer th:replace="fragments/footer :: rodape">
